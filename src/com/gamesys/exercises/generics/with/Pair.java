@@ -1,4 +1,4 @@
-package com.gamesys.exercises.generics.without;
+package com.gamesys.exercises.generics.with;
 
 public class Pair<T, S> {
 

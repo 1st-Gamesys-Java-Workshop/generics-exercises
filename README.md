@@ -44,7 +44,13 @@ box.box(1.2345);
 Double value = box.unbox();
 ```
 
-## 3. Working on Multiple Type Parameters and Parameterized Types
+Also, try
+```java
+Box<Integer> box = new Box<>();
+box.box("Trial"); // will this compile?
+```
+
+## 3. Working with Multiple Type Parameters and Parameterized Types
 
 Given: a class Pair below with two type parameters T and S
 
@@ -76,5 +82,9 @@ respectively. Note: you may set any valid value.
   respectively. Note: you may set any valid value.
 * Get the value of the left and right values and assign them to a String and List variable, respectively.
 
+#4: Working with Generic Methods
 
-
+Given the Generic Box class in exercise #2, create a class BoxUtils with following methods:
+* equals - determines whether two boxes are equal by comparing their contents (field object);
+returns `true` if two boxes are equal, `false` otherwise 
+* clone - accepts a Box object as an argument and returns a new Box object with the same content (field object)
