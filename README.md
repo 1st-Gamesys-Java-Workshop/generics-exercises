@@ -43,3 +43,38 @@ Box<Double> box = new Box<>();
 box.box(1.2345);
 Double value = box.unbox();
 ```
+
+## 3. Working on Multiple Type Parameters and Parameterized Types
+
+Given: a class Pair below with two type parameters T and S
+
+```java
+public class Pair<T, S> {
+
+    private T left;
+    private S right;
+
+    public Pair(T left, S right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    public T getLeft() {
+        return left;
+    }
+
+    public S getRight() {
+        return right;
+    }
+}
+```
+
+Create a class `GenericPairMain` which has a `main()` method that does the following:
+*  Instantiate a Pair object with Integer and Boolean as the left and right data types,
+respectively. Note: you may set any valid value.
+* Instantiate a Pair object with String and List of Integers as the left and right data types,
+  respectively. Note: you may set any valid value.
+* Get the value of the left and right values and assign them to a String and List variable, respectively.
+
+
+
