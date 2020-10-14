@@ -1,6 +1,6 @@
 # Generics Hands-on
 
-## 1. Custom Generic Type
+## 1. Working on objects without Generics
 
 Given: a class Box below has been implemented without using Generics.
 
@@ -24,7 +24,16 @@ public class Box {
 }
 ```
 
-Problem: you must create a version of the Box class using Generics
+In NonGenericBoxMain, remove the comment on the following line
+and fix the compile error
+
+```java
+//    String content = box.unbox();
+```
+
+## 2. Custom Generic Type
+
+Modify or create a version of the Box class using Generics
 such that the data type of the object inside the box can be generic.
 
 Here's a sample usage of the Generic Box class:
@@ -34,4 +43,3 @@ Box<Double> box = new Box<>();
 box.box(1.2345);
 Double value = box.unbox();
 ```
-
