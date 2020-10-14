@@ -82,7 +82,7 @@ respectively. Note: you may set any valid value.
   respectively. Note: you may set any valid value.
 * Get the value of the left and right values and assign them to a String and List variable, respectively.
 
-#4: Working with Generic Methods
+## 4: Working with Generic Methods
 
 Given the Generic Box class in exercise #2, create a class BoxUtils with following methods:
 * equals - determines whether two boxes are equal by comparing their contents (field object);
