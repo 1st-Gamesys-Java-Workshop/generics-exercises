@@ -9,7 +9,9 @@ public class Box {
     }
 
     public Object unbox() {
-        return object;
+        Object objectToUnbox = object;
+        object = null;
+        return objectToUnbox;
     }
 
     public boolean isEmpty() {
