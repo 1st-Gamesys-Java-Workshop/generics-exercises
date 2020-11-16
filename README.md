@@ -77,7 +77,7 @@ public class Pair<T, S> {
 }
 ```
 
-Create a class `GenericPairMain` which has a `main()` method that does the following:
+In `GenericPairMain` `main()` method:
 *  Instantiate a Pair object with Integer and Boolean as the left and right data types,
 respectively. Note: you may set any valid value.
 * Instantiate a Pair object with String and List of Integers as the left and right data types,
@@ -86,7 +86,7 @@ respectively. Note: you may set any valid value.
 
 ## 4: Working with Generic Methods
 
-Given the Generic Box class in exercise #2, create a class BoxUtils with following methods:
-* equals - determines whether two boxes are equal by comparing their contents (field object);
+Given the Generic Box class in exercise #2, create the following methods in class BoxUtil:
+* equals() - determines whether two boxes are equal by comparing their contents (field object);
 returns `true` if two boxes are equal, `false` otherwise 
-* clone - accepts a Box object as an argument and returns a new Box object with the same content (field object)
+* clone() - accepts a Box object as an argument and returns a new Box object with the same content (field object)
