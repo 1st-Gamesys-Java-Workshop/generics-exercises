@@ -1,20 +1,20 @@
-# Generics Hands-on
+# Generics (Part 2) Hands-on
 
-## 1. Working on objects without Generics
+## 1. Bounded Type Parameters
 
-Given: a class Box below has been implemented without using Generics.
+a) Modify the Generic `Box<T>` class to restrict the Type Parameter to Collection of String
 
 ```java
-public class Box {
+public class Box<T> {
 
-    private Object object;
+    private T object;
 
-    public void box(Object object) {
+    public void box(T object) {
         this.object = object;
     }
 
-    public Object unbox() {
-        Object objectToUnbox = object;
+    public T unbox() {
+        T objectToUnbox = object;
         object = null;
         return objectToUnbox;
     }
@@ -22,71 +22,63 @@ public class Box {
     public boolean isEmpty() {
         return object == null;
     }
+}
+```
+
+b) In a separate class `BoundedTypeBoxMain` in its `main()` method, instantiate `Box` class in 1.a
+and invoke `box()` method with an ArrayList of String
+
+```java
+box.box(new ArrayList<String>());
+```   
+
+c) Invoke `box()` method with a HashSet of String. Will the code compile?
+
+```java
+box.box(new HashSet<String>());
+```
+
+## 2. Bounded Type Parameters in Generic Methods
+
+a) Modify `PairUtils` `equals()` method to bound
+parameter type `T` to `CharSequence` (java.lang.CharSequence) and
+parameter type `S` to `Box<T>`.
+
+```java
+public class PairUtils {
+
+    public static <T, S> boolean equals(Pair<T, S> pair1, Pair<T, S> pair2) {
+        if (pair1 == null || pair2 == null ||
+                pair1.getLeft() == null || pair1.getRight() == null ||
+                pair2.getLeft() == null || pair2.getRight() == null) {
+            return false;
+        }
+        return pair1.getLeft().equals(pair2.getLeft()) && pair1.getRight().equals(pair2.getRight());
+    }
 
 }
 ```
 
-In NonGenericBoxMain, remove the comment on the following line
-and fix the compile error
+b) Try using `PairUtils` `equals()` method in another class.
+You may create a new class `PairUtilsTest` and write a `main()`
+method containing the following invocations:
 
 ```java
-//    String content = box.unbox();
-```
-
-## 2. Custom Generic Type
-
-Modify or create a version of the Box class using Generics
-such that the data type of the object inside the box can be generic.
-
-Here's a sample usage of the Generic Box class:
-
-```java
-Box<Double> box = new Box<>();
-box.box(1.2345);
-Double value = box.unbox();
-```
-
-Also, try
-```java
-Box<Integer> box = new Box<>();
-box.box("Trial"); // will this compile?
-```
-
-## 3. Working with Multiple Type Parameters and Parameterized Types
-
-Given: a class Pair below with two type parameters T and S
-
-```java
-public class Pair<T, S> {
-
-    private T left;
-    private S right;
-
-    public Pair(T left, S right) {
-        this.left = left;
-        this.right = right;
-    }
-
-    public T getLeft() {
-        return left;
-    }
-
-    public S getRight() {
-        return right;
+public class PairUtilsTest {
+    public static void main(String[] args){
+        StringBuilder stringBuilder1 = new StringBuilder();
+        stringBuilder1.append("Hello World");
+        Pair<String, StringBuilder> pair1 = new Pair<>("mykey", stringBuilder1);
+        
+        StringBuilder stringBuilder2 = new StringBuilder();
+        stringBuilder2.append("Hello");
+        Pair<String, StringBuilder> pair2 = new Pair<>("mykey", stringBuilder2);
+        
+        System.out.println("equal: " + PairUtils.equals(pair1, pair2));
     }
 }
 ```
 
-In `GenericPairMain` `main()` method:
-*  Instantiate a Pair object with Integer and Boolean as the left and right data types,
-respectively. Note: you may set any valid value.
-* Instantiate a Pair object with String and List of Integers as the left and right data types,
-  respectively. Note: you may set any valid value.
-* Get the value of the left and right values and assign them to a String and List variable, respectively.
+## 3. Generics and Inheritance
 
-## 4: Working with Generic Methods
 
-Given the Generic Box class in exercise #2, create the following methods in class BoxUtil:
-* equals() - determines whether two boxes are equal by comparing their contents (field object);
-returns `true` if two boxes are equal, `false` otherwise 
-* clone() - accepts a Box object as an argument and returns a new Box object with the same content (field object)
