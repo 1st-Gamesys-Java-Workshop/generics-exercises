@@ -141,3 +141,43 @@ public class AtmLogic {
 
 }
 ```
+
+## 4. Type Inference
+
+a) Given:
+
+```java
+static <T> T pick(T t1, T t2) {
+    return t2;
+}
+```
+
+Will the following compile? Why?
+
+```java
+Serializable value = pick("Hello World!", new ArrayList<Integer>());
+``` 
+
+b) Will the following compile? Why?
+
+```java
+Collection<String> collections = new ArrayList<String>();
+```
+
+How will the statement look like if we apply Type Inference?
+
+c) Given:
+
+```java
+Map<String, Map<String, Object>> doubleMap = new HashMap<>();
+```
+
+Is the following statement valid?
+
+```java
+doubleMap.put("abc", Collections.<String, Map<String, Object>>emptyMap());
+```
+
+Correct the statement above and apply Type Inference.
+
+
