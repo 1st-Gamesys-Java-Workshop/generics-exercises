@@ -16,7 +16,7 @@ public class WithdrawalHandler implements TransactionHandler<Withdrawal> {
 
     @Override
     public TransactionResult handleTransaction(Withdrawal transaction) {
-        accountService.withdraw(transaction.getAccountNumber(), transaction.getAmount());
+        accountService.debit(transaction.getAccountNumber(), transaction.getAmount());
         BigDecimal balance = accountService.getBalance(transaction.getAccountNumber());
         return new TransactionResult(transaction.getTransactionId(), true, balance);
     }

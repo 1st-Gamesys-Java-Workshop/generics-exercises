@@ -16,8 +16,8 @@ public class FundTransferHandler implements TransactionHandler<FundTransfer> {
 
     @Override
     public TransactionResult handleTransaction(FundTransfer transaction) {
-        accountService.withdraw(transaction.getSourceAccountNumber(), transaction.getAmount());
-        accountService.deposit(transaction.getTargetAccountNumber(), transaction.getAmount());
+        accountService.debit(transaction.getSourceAccountNumber(), transaction.getAmount());
+        accountService.credit(transaction.getTargetAccountNumber(), transaction.getAmount());
         BigDecimal balance = accountService.getBalance(transaction.getSourceAccountNumber());
         return new TransactionResult(transaction.getTransactionId(), true, balance);
     }

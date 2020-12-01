@@ -16,7 +16,7 @@ public class DepositHandler implements TransactionHandler<Deposit> {
 
     @Override
     public TransactionResult handleTransaction(Deposit transaction) {
-        accountService.deposit(transaction.getAccountNumber(), transaction.getAmount());
+        accountService.credit(transaction.getAccountNumber(), transaction.getAmount());
         BigDecimal balance = accountService.getBalance(transaction.getAccountNumber());
         return new TransactionResult(transaction.getTransactionId(), true, balance);
     }
