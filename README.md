@@ -80,7 +80,83 @@ public class PairUtilsTest {
 ```
 
 ## 3. Generics and Inheritance
+Explore the classes __BankMain__ and __Bank__
 
+```java
+public class BankMain {
+
+    public static void main(String[] args) {
+        AccountService accountService = new FakeAccountService();
+
+        BalanceInquiryHandler balanceInquiryHandler = new BalanceInquiryHandler(accountService);
+        DepositHandler depositHandler = new DepositHandler(accountService);
+        WithdrawalHandler withdrawalHandler = new WithdrawalHandler(accountService);
+        FundTransferHandler fundTransferHandler = new FundTransferHandler(accountService);
+
+        Bank bank = new Bank(balanceInquiryHandler, depositHandler, withdrawalHandler, fundTransferHandler);
+
+        String account1 = "0001234567";
+        String account2 = "0001234600";
+
+        System.out.println("Balance Inquiry...");
+        TransactionResult result = bank.balanceInquiry(new BalanceInquiry(account1));
+        System.out.println(result);
+
+        System.out.println("\nDeposit Amount...");
+        result = bank.deposit(new Deposit(account1, new BigDecimal("100.0")));
+        System.out.println(result);
+
+        System.out.println("\nWithdraw Amount...");
+        result = bank.withdraw(new Withdrawal(account1, new BigDecimal("15.0")));
+        System.out.println(result);
+
+        System.out.println("\nFund Transfer...");
+        result = bank.fundTransfer(new FundTransfer(account1, account2, new BigDecimal("25.0")));
+        System.out.println(result);
+    }
+
+}
+```
+
+```java
+public class Bank {
+
+    private final BalanceInquiryHandler balanceInquiryHandler;
+    private final DepositHandler depositHandler;
+    private final WithdrawalHandler withdrawalHandler;
+    private final FundTransferHandler fundTransferHandler;
+
+    public Bank(BalanceInquiryHandler balanceInquiryHandler,
+                DepositHandler depositHandler,
+                WithdrawalHandler withdrawalHandler,
+                FundTransferHandler fundTransferHandler) {
+        this.balanceInquiryHandler = balanceInquiryHandler;
+        this.depositHandler = depositHandler;
+        this.withdrawalHandler = withdrawalHandler;
+        this.fundTransferHandler = fundTransferHandler;
+    }
+
+    public TransactionResult balanceInquiry(BalanceInquiry balanceInquiry) {
+        return balanceInquiryHandler.handleTransaction(balanceInquiry);
+    }
+
+    public TransactionResult deposit(Deposit deposit) {
+        return depositHandler.handleTransaction(deposit);
+    }
+
+    public TransactionResult withdraw(Withdrawal withdrawal) {
+        return withdrawalHandler.handleTransaction(withdrawal);
+    }
+
+    public TransactionResult fundTransfer(FundTransfer fundTransfer) {
+        return fundTransferHandler.handleTransaction(fundTransfer);
+    }
+
+}
+```
+
+Modify the application such that Balance Inquiry, Deposit, Widthdrawal and Fund Transfer will be handled
+by just one __GenericTransactionHandler__.
 
 ## 4. Type Inference
 
