@@ -25,4 +25,11 @@ public class TransactionResult {
     public BigDecimal getBalance() {
         return balance;
     }
+
+    @Override
+    public String toString() {
+        return "transactionId='" + transactionId + '\'' +
+                ", successful=" + successful +
+                ", balance=" + balance;
+    }
 }

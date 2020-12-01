@@ -1,6 +1,7 @@
 package com.gamesys.exercises.generics.inheritance.bank.core.transaction;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class FundTransfer implements Transaction, Debit, Credit {
 
@@ -9,8 +10,8 @@ public class FundTransfer implements Transaction, Debit, Credit {
     private final String targetAccountNumber;
     private final BigDecimal amount;
 
-    public FundTransfer(String transactionId, String sourceAccountNumber, String targetAccountNumber, BigDecimal amount) {
-        this.transactionId = transactionId;
+    public FundTransfer(String sourceAccountNumber, String targetAccountNumber, BigDecimal amount) {
+        this.transactionId = UUID.randomUUID().toString();
         this.sourceAccountNumber = sourceAccountNumber;
         this.targetAccountNumber = targetAccountNumber;
         this.amount = amount;

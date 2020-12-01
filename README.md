@@ -81,66 +81,6 @@ public class PairUtilsTest {
 
 ## 3. Generics and Inheritance
 
-Given the following code for ATM Process/Logic, extract the lines of code for the transaction proper into separate
-classes and figure out the generic steps to reduce the transaction processes into one Generic Type.
-
-```java
-public class AtmLogic {
-
-    public void start() {
-        // Start a new transaction
-        String cardNumber = userInterface.askToInsertCard();
-        Transaction transaction = bankGateway.createNewTransaction(cardNumber);
-
-        // Validate PIN
-        String pin;
-        int pinValidationAttempts = 0;
-        do {
-            if (pinValidationAttempts == 3) {
-                transaction.setResult(new TransactionResult(TransactionStatus.CARD_BLOCKED));
-                break;
-            }
-            pin = userInterface.askForPin();
-            pinValidationAttempts++;
-        } while (!bankGateway.isValidPin(pin, transaction));
-
-        if (transaction.getResult() == null || !TransactionStatus.CARD_BLOCKED.equals(transaction.getResult().getStatus())) {
-            TransactionType transactionType = userInterface.askForTransactionType();
-            transaction.setType(transactionType);
-
-            // Perform Transaction Proper
-            BigDecimal availableBalance;
-            BigDecimal amount;
-
-            switch (transactionType) {
-                case BALANCE_INQUIRY:
-                    availableBalance = bankGateway.inquireBalance(transaction);
-                    transaction.setResult(new TransactionResult(TransactionStatus.SUCCESSFUL, availableBalance));
-                    break;
-                case DEPOSIT:
-                    amount = userInterface.askForAmount();
-                    transaction.setAmount(amount);
-                    bankGateway.creditAccount(amount, transaction);
-                    availableBalance = bankGateway.inquireBalance(transaction);
-                    transaction.setResult(new TransactionResult(TransactionStatus.SUCCESSFUL, availableBalance));
-                    break;
-                case WITHDRAWAL:
-                    amount = userInterface.askForAmount();
-                    transaction.setAmount(amount);
-                    bankGateway.debitAccount(amount, transaction);
-                    availableBalance = bankGateway.inquireBalance(transaction);
-                    transaction.setResult(new TransactionResult(TransactionStatus.SUCCESSFUL, availableBalance));
-                    break;
-                default:
-            }
-        }
-
-        // Display Result
-        userInterface.displayTransactionResult(transaction);
-    }
-
-}
-```
 
 ## 4. Type Inference
 
