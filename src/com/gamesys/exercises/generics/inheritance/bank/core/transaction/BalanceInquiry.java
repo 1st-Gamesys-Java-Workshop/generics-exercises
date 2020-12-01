@@ -17,6 +17,7 @@ public class BalanceInquiry implements Transaction {
         return transactionId;
     }
 
+    @Override
     public String getAccountNumber() {
         return accountNumber;
     }

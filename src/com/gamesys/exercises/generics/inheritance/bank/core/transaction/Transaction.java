@@ -4,4 +4,6 @@ public interface Transaction {
 
     String getTransactionId();
 
+    String getAccountNumber();
+
 }

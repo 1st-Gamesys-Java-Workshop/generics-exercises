@@ -2,7 +2,7 @@ package com.gamesys.exercises.generics.inheritance.bank.core.transaction;
 
 import java.math.BigDecimal;
 
-public class Withdrawal implements Transaction {
+public class Withdrawal implements Transaction, Debit {
 
     private final String transactionId;
     private final String accountNumber;
@@ -19,11 +19,18 @@ public class Withdrawal implements Transaction {
         return transactionId;
     }
 
+    @Override
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public BigDecimal getAmount() {
+    @Override
+    public BigDecimal getDebitAmount() {
         return amount;
+    }
+
+    @Override
+    public String getSourceAccountNumber() {
+        return accountNumber;
     }
 }
